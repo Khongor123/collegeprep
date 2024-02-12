@@ -12,7 +12,7 @@ const seoSchema = z.object({
     pageType: z.enum(['website', 'article']).default('website')
 });
 
-const blog = defineCollection({
+const guide = defineCollection({
     schema: z.object({
         title: z.string(),
         excerpt: z.string().optional(),
@@ -31,4 +31,4 @@ const pages = defineCollection({
     })
 });
 
-export const collections = { blog, pages };
+export const collections = { guide, pages };

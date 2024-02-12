@@ -8,14 +8,14 @@ import siteConfig from '../../data/site-config';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
+    const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
     return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
 }
 
-type Props = { page: Page<CollectionEntry<'blog'>> };
+type Props = { page: Page<CollectionEntry<'guide'>> };
 
 const { page } = Astro.props;
-const blog = page.data;
+const guide = page.data;
 ---
 
 <BaseLayout
@@ -25,6 +25,6 @@ const blog = page.data;
     showHeader={false}
 >
     <h1 class="mb-12 text-2xl leading-tight font-serif italic sm:mb-16 sm:text-4xl">Guide Archive</h1>
-    {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+    {guide.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
     <Pagination page={page} class="my-16 sm:my-24" />
 </BaseLayout>
