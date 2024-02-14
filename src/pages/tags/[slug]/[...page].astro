@@ -20,6 +20,8 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     });
 }
 
+export const prerender = true;
+
 type Props = { page: Page<CollectionEntry<'guide'>> };
 
 const { page } = Astro.props;

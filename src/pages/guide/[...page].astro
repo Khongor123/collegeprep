@@ -12,6 +12,8 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
 }
 
+export const prerender = true;
+
 type Props = { page: Page<CollectionEntry<'guide'>> };
 
 const { page } = Astro.props;

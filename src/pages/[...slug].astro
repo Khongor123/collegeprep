@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import type { GetStaticPathsOptions, Page } from 'astro';
+
 
 export async function getStaticPaths() {
     const pages = await getCollection('pages');
@@ -11,6 +13,8 @@ export async function getStaticPaths() {
         };
     });
 }
+
+export const prerender = true;
 
 type Props = { page: CollectionEntry<'pages'> };
 

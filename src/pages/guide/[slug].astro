@@ -6,6 +6,8 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import PostPreview from '../../components/PostPreview.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 import { slugify } from '../../utils/common-utils';
+import type { GetStaticPathsOptions, Page } from 'astro';
+
 
 export async function getStaticPaths() {
     const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
@@ -19,6 +21,8 @@ export async function getStaticPaths() {
         }
     }));
 }
+
+export const prerender = true;
 
 type Props = { post: CollectionEntry<'guide'>; prevPost: CollectionEntry<'guide'>; nextPost: CollectionEntry<'guide'> };
 
