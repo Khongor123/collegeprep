@@ -7,10 +7,10 @@ import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://collegeprep-six.vercel.com',
   integrations: [mdx(), sitemap(), tailwind({
     applyBaseStyles: false
   })],
-  output: "static",
+  output: "server",
   adapter: vercel()
 });
