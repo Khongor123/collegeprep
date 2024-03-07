@@ -90,7 +90,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: 'Hi There *Traveller*',
-        text: "I'm **Khongor**, a high-school junior set to graduate in June 2025. As my college applications are near, I've decided to start preparing as early as possible and have obtained quite some knowledge and resources, hence deciding to share it online (also organizing everything).",
+        text: "This website has been built to help out any student in need of centralized **College Preparation** info and guides, and we hope that it will prove useful to you!",
         image: {
             src: '/hero.jpeg',
             alt: 'A person sitting at a desk in front of a computer'
