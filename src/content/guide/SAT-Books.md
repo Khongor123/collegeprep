@@ -7,6 +7,7 @@ tags:
   - Resource
   - Book
   - SAT
+  - Exams
 seo:
   image:
     src: '/post-2.jpg'
@@ -40,5 +41,3 @@ This book brings together everything you need to know for the math section. Unli
 ## The Ultimate Guide to SAT Grammar, by Erica Meltzer
 
 [Download](https://drive.google.com/file/d/1jPl2bKOqVCQEtLqbbF0lZT177-x_EA2H/view)
-
-
