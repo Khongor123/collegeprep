@@ -57,18 +57,22 @@ const siteConfig: SiteConfig = {
         {
             text: 'Tags',
             href: '/tags'
+        },
+        {
+            text: 'Contact Us',
+            href: '/contact'
         }
     ],
     footerNavLinks: [
         // TODO
-        // {
-        //     text: 'About',
-        //     href: '/about'
-        // },
         {
-            text: 'Contact',
-            href: '/contact'
+            text: 'About',
+            href: '/about'
         },
+        // {
+        //     text: 'Contact',
+        //     href: '/contact'
+        // },
         {
             text: 'Terms',
             href: '/terms'
@@ -89,7 +93,7 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        title: 'Hi There *Traveller*',
+        title: 'Welcome 👋',
         text: "This website has been built to help out any student in need of centralized **College Preparation** info and guides, and we hope that it will prove useful to you!",
         image: {
             src: '/hero.jpeg',

@@ -16,9 +16,9 @@ const featuredPosts = posts.filter(({ data }) => data.isFeatured);
     {
         featuredPosts.length > 0 && (
             <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Guides</h2>
+                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl text-center">Guides</h2>
                 {featuredPosts.map((post) => (
-                    <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
+                    <PostPreview post={post} class="mb-10 sm:mb-12 flex" headingLevel="h3" />
                 ))}
                 <div class="mt-12 sm:mt-16">
                     <Button href="/guide">View All Posts</Button>
