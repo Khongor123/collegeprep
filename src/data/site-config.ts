@@ -1,5 +1,6 @@
 export type Image = {
     src: string;
+    src_dark: string;
     alt?: string;
     caption?: string;
 };
@@ -43,6 +44,7 @@ const siteConfig: SiteConfig = {
     description: 'Collective resources for college prep',
     image: {
         src: '/dante-preview.jpg',
+        src_dark: '',
         alt: 'Dante - Astro.js and Tailwind CSS theme'
     },
     headerNavLinks: [
@@ -97,7 +99,8 @@ const siteConfig: SiteConfig = {
         text: "This website has been built to help out any student in need of centralized **College Preparation** info and guides, and we hope that it will prove useful to you!",
         image: {
             src: '/hero.jpg',
-            alt: 'A person sitting at a desk in front of a computer'
+            src_dark: '',
+            alt: 'banner'
         },
         actions: [
             {
