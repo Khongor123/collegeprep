@@ -13,6 +13,9 @@ const featuredPosts = posts.filter(({ data }) => data.isFeatured);
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image} showHeader={false}>
     <Hero />
+
+    <div class:list={['pt-6 flex flex-col gap-4 border-t border-main text-center mb-6']} />
+
     {
         featuredPosts.length > 0 && (
             <div class="mb-16 sm:mb-24">
@@ -21,7 +24,7 @@ const featuredPosts = posts.filter(({ data }) => data.isFeatured);
                     <PostPreview post={post} class="mb-10 sm:mb-12 flex" headingLevel="h3" />
                 ))}
                 <div class="mt-12 sm:mt-16">
-                    <Button href="/guide">View All Posts</Button>
+                    <Button href="/guide">View All</Button>
                 </div>
             </div>
         )
