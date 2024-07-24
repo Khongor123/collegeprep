@@ -96,7 +96,7 @@ const siteConfig: SiteConfig = {
         title: 'Welcome 👋',
         text: "This website has been built to help out any student in need of centralized **College Preparation** info and guides, and we hope that it will prove useful to you!",
         image: {
-            src: '/hero.jpeg',
+            src: '/hero.jpg',
             alt: 'A person sitting at a desk in front of a computer'
         },
         actions: [
