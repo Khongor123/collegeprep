@@ -1,6 +1,6 @@
 ---
 title: Books to prepare for the SAT
-description: Complete list of books you can use to prepare fully for the SAT
+excerpt: Complete list of books you can use to prepare fully for the SAT
 publishDate: 'Feb 12 2024'
 isFeatured: true
 tags:

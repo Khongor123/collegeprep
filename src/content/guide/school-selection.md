@@ -4,7 +4,6 @@ excerpt: How to decide which schools you should send your application to, and wh
 publishDate: 'Feb 12 2024'
 isFeatured: true
 tags:
-  - Guide
   - College
 seo:
   image:
