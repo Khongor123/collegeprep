@@ -99,13 +99,13 @@ const siteConfig: SiteConfig = {
         text: "This website has been built to help out any student in need of centralized **College Preparation** info and guides, and we hope that it will prove useful to you!",
         image: {
             src: '/hero.jpg',
-            src_dark: '',
+            src_dark: '/hero-dark.jpg',
             alt: 'banner'
         },
         actions: [
             {
-                text: 'Get in Touch',
-                href: '/contact'
+                text: 'Manifesto',
+                href: '/about'
             }
         ]
     },

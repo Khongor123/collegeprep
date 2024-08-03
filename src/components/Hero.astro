@@ -8,7 +8,7 @@ const hero = siteConfig.hero;
 
 {
     (hero?.title || hero?.image?.src || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
-        <section class="w-full flex flex-col gap-8 mb-16 sm:mb-24">
+        <section class="w-full flex flex-col gap-8 mb-16 sm:mb-24 dark:hidden">
             {/* {hero.title && <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight text-center" set:html={marked.parse(hero.title)} />} */}
             {hero.image?.src && (
                 <figure>
@@ -24,5 +24,21 @@ const hero = siteConfig.hero;
                 </div>
             )}
         </section>
+        <section class="w-full flex-col gap-8 mb-16 sm:mb-24 hidden dark:flex">
+            {/* {hero.title && <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight text-center" set:html={marked.parse(hero.title)} />} */}
+            {hero.image?.src && (
+                <figure>
+                    <img class="w-full" src={hero.image.src_dark} loading="lazy" decoding="async" alt={hero.image.alt || ''} />
+                </figure>
+            )}
+            {hero.text && <div class="max-w-none prose prose-dante sm:prose-lg text-center" set:html={marked.parse(hero.text)} />}
+            {hero.actions && hero.actions.length > 0 && (
+                <div class="flex flex-wrap gap-4 justify-center">
+                    {hero.actions.map((action) => (
+                        <Button href={action.href}>{action.text}</Button>
+                    ))}
+                </div>
+            )}
+        </section>
     )
-}   
+}
