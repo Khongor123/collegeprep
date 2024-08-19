@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel/serverless';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://coprep.vercel.app',
+    site: 'https://collegeart.vercel.app',
     integrations: [
         mdx(),
         sitemap(),
