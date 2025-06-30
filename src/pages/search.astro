@@ -26,6 +26,9 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
                 class="block w-full pl-10 pr-3 py-2 border border-main rounded-md leading-5 bg-transparent placeholder-main/60 focus:outline-none focus:ring-2 focus:ring-main focus:border-transparent"
                 placeholder="Search guides..."
                 autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
             />
         </div>
     </div>
@@ -49,7 +52,10 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
             const noResults = document.getElementById('no-results');
             const resultItems = document.querySelectorAll('.search-result');
 
-            if (!searchInput || !searchResults || !noResults) return;
+            if (!searchInput || !searchResults || !noResults) {
+                console.log('Search elements not found');
+                return;
+            }
 
             function performSearch(query) {
                 const searchTerm = query.toLowerCase().trim();
@@ -77,19 +83,62 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
                 }
             }
 
+            // Multiple event listeners for better mobile support
             searchInput.addEventListener('input', function(e) {
                 performSearch(e.target.value);
             });
 
-            // Focus search input on page load
-            searchInput.focus();
+            searchInput.addEventListener('keyup', function(e) {
+                performSearch(e.target.value);
+            });
+
+            searchInput.addEventListener('change', function(e) {
+                performSearch(e.target.value);
+            });
+
+            // Touch events for mobile
+            searchInput.addEventListener('touchend', function(e) {
+                // Prevent zoom on iOS
+                e.preventDefault();
+                searchInput.focus();
+            });
+
+            // Handle paste events
+            searchInput.addEventListener('paste', function(e) {
+                setTimeout(function() {
+                    performSearch(searchInput.value);
+                }, 10);
+            });
+
+            // Initial search to show all results
+            performSearch('');
+
+            // Focus search input on page load (with delay for mobile)
+            setTimeout(function() {
+                searchInput.focus();
+            }, 100);
         }
 
-        // Initialize search when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initSearch);
-        } else {
-            initSearch();
+        // Multiple initialization methods for better mobile support
+        function startSearch() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSearch);
+            } else {
+                initSearch();
+            }
         }
+
+        // Start immediately
+        startSearch();
+
+        // Also try again after a short delay for mobile
+        setTimeout(startSearch, 500);
+
+        // Handle page visibility changes (mobile browser switching)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                setTimeout(startSearch, 100);
+            }
+        });
     })();
 </script>
