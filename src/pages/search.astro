@@ -32,7 +32,7 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
 
     <div id="search-results" class="space-y-10 sm:space-y-12">
         {posts.map((post) => (
-            <PostPreview post={post} class="search-result" />
+            <PostPreview post={post} class="search-result" data-title={post.data.title.toLowerCase()} />
         ))}
     </div>
 
@@ -42,32 +42,25 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
 </BaseLayout>
 
 <script>
-    document.addEventListener('astro:page-load', () => {
-        const searchInput = document.getElementById('search-input') as HTMLInputElement;
-        const searchResults = document.getElementById('search-results') as HTMLDivElement;
-        const noResults = document.getElementById('no-results') as HTMLDivElement;
-        const resultItems = document.querySelectorAll('.search-result') as NodeListOf<HTMLElement>;
+    function initSearch() {
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const noResults = document.getElementById('no-results');
+        const resultItems = document.querySelectorAll('.search-result');
 
         if (!searchInput || !searchResults || !noResults) return;
 
-        const posts = Array.from(resultItems).map(item => {
-            const titleElement = item.querySelector('h2, h3') as HTMLElement;
-            return {
-                element: item,
-                title: titleElement?.textContent?.toLowerCase() || ''
-            };
-        });
-
-        function performSearch(query: string) {
+        function performSearch(query) {
             const searchTerm = query.toLowerCase().trim();
             let hasResults = false;
 
-            posts.forEach(({ element, title }) => {
+            resultItems.forEach((item) => {
+                const title = item.getAttribute('data-title') || '';
                 if (searchTerm === '' || title.includes(searchTerm)) {
-                    element.style.display = 'block';
+                    item.style.display = 'block';
                     hasResults = true;
                 } else {
-                    element.style.display = 'none';
+                    item.style.display = 'none';
                 }
             });
 
@@ -83,12 +76,21 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
             }
         }
 
-        searchInput.addEventListener('input', (e) => {
-            const target = e.target as HTMLInputElement;
-            performSearch(target.value);
+        searchInput.addEventListener('input', function(e) {
+            performSearch(e.target.value);
         });
 
         // Focus search input on page load
         searchInput.focus();
-    });
+    }
+
+    // Initialize search when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSearch);
+    } else {
+        initSearch();
+    }
+
+    // Handle Astro page transitions
+    document.addEventListener('astro:page-load', initSearch);
 </script>
