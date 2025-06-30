@@ -53,14 +53,6 @@ const siteConfig: SiteConfig = {
             href: '/'
         },
         {
-            text: 'Guides',
-            href: '/guide'
-        },
-        {
-            text: 'Tags',
-            href: '/tags'
-        },
-        {
             text: 'Search',
             href: '/search'
         },
