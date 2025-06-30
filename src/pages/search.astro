@@ -41,56 +41,55 @@ const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
     </div>
 </BaseLayout>
 
-<script>
-    function initSearch() {
-        const searchInput = document.getElementById('search-input');
-        const searchResults = document.getElementById('search-results');
-        const noResults = document.getElementById('no-results');
-        const resultItems = document.querySelectorAll('.search-result');
+<script is:inline>
+    (function() {
+        function initSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const noResults = document.getElementById('no-results');
+            const resultItems = document.querySelectorAll('.search-result');
 
-        if (!searchInput || !searchResults || !noResults) return;
+            if (!searchInput || !searchResults || !noResults) return;
 
-        function performSearch(query) {
-            const searchTerm = query.toLowerCase().trim();
-            let hasResults = false;
+            function performSearch(query) {
+                const searchTerm = query.toLowerCase().trim();
+                let hasResults = false;
 
-            resultItems.forEach((item) => {
-                const title = item.getAttribute('data-title') || '';
-                if (searchTerm === '' || title.includes(searchTerm)) {
-                    item.style.display = 'block';
-                    hasResults = true;
+                resultItems.forEach(function(item) {
+                    const title = item.getAttribute('data-title') || '';
+                    if (searchTerm === '' || title.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (searchTerm === '') {
+                    searchResults.style.display = 'block';
+                    noResults.style.display = 'none';
+                } else if (hasResults) {
+                    searchResults.style.display = 'block';
+                    noResults.style.display = 'none';
                 } else {
-                    item.style.display = 'none';
+                    searchResults.style.display = 'none';
+                    noResults.style.display = 'block';
                 }
+            }
+
+            searchInput.addEventListener('input', function(e) {
+                performSearch(e.target.value);
             });
 
-            if (searchTerm === '') {
-                searchResults.style.display = 'block';
-                noResults.style.display = 'none';
-            } else if (hasResults) {
-                searchResults.style.display = 'block';
-                noResults.style.display = 'none';
-            } else {
-                searchResults.style.display = 'none';
-                noResults.style.display = 'block';
-            }
+            // Focus search input on page load
+            searchInput.focus();
         }
 
-        searchInput.addEventListener('input', function(e) {
-            performSearch(e.target.value);
-        });
-
-        // Focus search input on page load
-        searchInput.focus();
-    }
-
-    // Initialize search when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSearch);
-    } else {
-        initSearch();
-    }
-
-    // Handle Astro page transitions
-    document.addEventListener('astro:page-load', initSearch);
+        // Initialize search when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSearch);
+        } else {
+            initSearch();
+        }
+    })();
 </script>
