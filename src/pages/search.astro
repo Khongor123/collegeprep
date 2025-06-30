@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostPreview from '../components/PostPreview.astro';
+import Search from '../icons/Search.astro';
+import { sortItemsByDateDesc } from '../utils/data-utils';
+
+const posts = (await getCollection('guide')).sort(sortItemsByDateDesc);
+---
+
+<BaseLayout
+    title="Search"
+    description="Search through our collection of college preparation guides and resources"
+    showHeader={false}
+>
+    <div class="mb-12 sm:mb-16">
+        <h1 class="text-2xl leading-tight font-serif italic sm:text-4xl mb-8">Search Guides</h1>
+
+        <div class="relative max-w-md">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search />
+            </div>
+            <input
+                type="text"
+                id="search-input"
+                class="block w-full pl-10 pr-3 py-2 border border-main rounded-md leading-5 bg-transparent placeholder-main/60 focus:outline-none focus:ring-2 focus:ring-main focus:border-transparent"
+                placeholder="Search guides..."
+                autocomplete="off"
+            />
+        </div>
+    </div>
+
+    <div id="search-results" class="space-y-10 sm:space-y-12">
+        {posts.map((post) => (
+            <PostPreview post={post} class="search-result" />
+        ))}
+    </div>
+
+    <div id="no-results" class="hidden text-center py-12">
+        <p class="text-lg text-main/60">No guides found matching your search.</p>
+    </div>
+</BaseLayout>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const searchInput = document.getElementById('search-input') as HTMLInputElement;
+        const searchResults = document.getElementById('search-results') as HTMLDivElement;
+        const noResults = document.getElementById('no-results') as HTMLDivElement;
+        const resultItems = document.querySelectorAll('.search-result') as NodeListOf<HTMLElement>;
+
+        if (!searchInput || !searchResults || !noResults) return;
+
+        const posts = Array.from(resultItems).map(item => {
+            const titleElement = item.querySelector('h2, h3') as HTMLElement;
+            return {
+                element: item,
+                title: titleElement?.textContent?.toLowerCase() || ''
+            };
+        });
+
+        function performSearch(query: string) {
+            const searchTerm = query.toLowerCase().trim();
+            let hasResults = false;
+
+            posts.forEach(({ element, title }) => {
+                if (searchTerm === '' || title.includes(searchTerm)) {
+                    element.style.display = 'block';
+                    hasResults = true;
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+
+            if (searchTerm === '') {
+                searchResults.style.display = 'block';
+                noResults.style.display = 'none';
+            } else if (hasResults) {
+                searchResults.style.display = 'block';
+                noResults.style.display = 'none';
+            } else {
+                searchResults.style.display = 'none';
+                noResults.style.display = 'block';
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const target = e.target as HTMLInputElement;
+            performSearch(target.value);
+        });
+
+        // Focus search input on page load
+        searchInput.focus();
+    });
+</script>

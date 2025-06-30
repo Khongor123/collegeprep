@@ -61,6 +61,10 @@ const siteConfig: SiteConfig = {
             href: '/tags'
         },
         {
+            text: 'Search',
+            href: '/search'
+        },
+        {
             text: 'Contact Us',
             href: '/contact'
         }
