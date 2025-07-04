@@ -2,7 +2,7 @@
 title: Introduction the Digital SAT Math Section
 excerpt: Detailed overview of the Math section of the SAT Examination.
 publishDate: 'Aug 3, 2024'
-featured: true
+isFeatured: false
 tags:
   - SAT
   - Exams

@@ -43,9 +43,9 @@ const siteConfig: SiteConfig = {
     subtitle: 'Growing resources for you to prepare for college',
     description: 'Collective resources for college prep',
     image: {
-        src: '/dante-preview.jpg',
-        src_dark: '',
-        alt: 'Dante - Astro.js and Tailwind CSS theme'
+        src: '/hero.jpg',
+        src_dark: 'hero-dark.jpg',
+        alt: 'CollegeArt'
     },
     headerNavLinks: [
         {
